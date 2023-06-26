@@ -42,23 +42,15 @@
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
                             href="{{ route('contact') }}">Kontakt</a>
                     </li>
+                    @foreach ($content as $pageContent)
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                                href="{{ route('custom', $pageContent->slug) }}">{{ $pageContent->pagename }}</a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- Slider -->
-    {{-- <header class="masthead" style="background-image: url({{ asset('img/slider1.jpg') }})">
-        <div class="container position-relative px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <div class="site-heading">
-                         <h1>{{ $pageTitle }}</h1>
-                        <span class="subheading">Najnowsze przepisy na sałatki owocowe już dostępne!</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header> --}}
     @yield('header')
     @yield('content')
     <!-- Footer -->

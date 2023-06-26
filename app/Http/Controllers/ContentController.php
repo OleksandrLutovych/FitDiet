@@ -17,7 +17,6 @@ class ContentController extends Controller
 
         return view('pageContent.index', ['content' => $content]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -30,12 +29,14 @@ class ContentController extends Controller
     {
         $content = new Content($request->all());
 
+        $content->slug = Str::slug($request->pageName);
         $content->save();
         return redirect(route('pageContent.index'));
     }
     public function edit(Content $content)
     {
-        return view('pageContent.edit',
+        return view(
+            'pageContent.edit',
             ['content' => $content]
         );
     }
@@ -45,7 +46,6 @@ class ContentController extends Controller
      */
     public function update(Request $request, Content $content)
     {
-        
     }
 
     /**
@@ -55,5 +55,14 @@ class ContentController extends Controller
     {
         $content->delete();
         return redirect(route('posts.index'));
+    }
+    public function page($page) {
+
+        $content = Content::where('slug', $page)->get();
+        
+        if (!$page) {
+            abort(404);
+        }
+        return view('custom', compact('content'));
     }
 }

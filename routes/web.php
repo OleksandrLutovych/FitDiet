@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// -- Pages routing
 Route::get('/', [App\Http\Controllers\SiteController::class, 'index'])->name('index');
 Route::get('/post/{slug}', [App\Http\Controllers\SiteController::class, 'post'])->name('post');
 Route::get('/blog', [App\Http\Controllers\SiteController::class, 'post_index'])->name('post_index');
 Route::get('/about', [App\Http\Controllers\SiteController::class, 'about'])->name('about');
 Route::get('/contact', [App\Http\Controllers\SiteController::class, 'contact'])->name('contact');
+Route::get('/custom/{page}', [App\Http\Controllers\ContentController::class, 'page'])->name('custom');
 
 Auth::routes();
 
@@ -43,3 +45,5 @@ Route::get('/admin/content', [App\Http\Controllers\ContentController::class, 'in
 Route::get('/admin/content/create', [App\Http\Controllers\ContentController::class, 'create'])->name('pageContent.create')->middleware('auth');
 
 Route::post('/admin/content', [App\Http\Controllers\ContentController::class, 'addPage'])->name('pageContent.addPage')->middleware('auth');
+
+
